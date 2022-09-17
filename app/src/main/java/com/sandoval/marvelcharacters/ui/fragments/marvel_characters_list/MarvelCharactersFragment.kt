@@ -1,4 +1,4 @@
-package com.sandoval.marvelcharacters.ui.fragments
+package com.sandoval.marvelcharacters.ui.fragments.marvel_characters_list
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
