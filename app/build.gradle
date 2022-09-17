@@ -1,18 +1,23 @@
 plugins {
     id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'dagger.hilt.android.plugin'
     id 'org.jetbrains.kotlin.android'
 }
 
 android {
     namespace 'com.sandoval.marvelcharacters'
-    compileSdk 32
+    compileSdk libs.compileSdk.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.sandoval.marvelcharacters"
-        minSdk 26
-        targetSdk 32
-        versionCode 1
-        versionName "1.0"
+        applicationId libs.applicationId.applicationIdName
+        minSdk libs.minSdk.minSdkVersion
+        targetSdk libs.targetSdk.targetSdkVersion
+        versionCode libs.versionCode.versionCodeVersion
+        versionName libs.versionName.versionNameDev
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -24,21 +29,67 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
+
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
+
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '11'
+        freeCompilerArgs += [
+                "-opt-in=kotlin.RequiresOptIn"
+        ]
     }
 }
 
+apply from: "$rootDir/marvel_characters.gradle"
+
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    //Android Framework
+    implementation libs.android.androidXCoreKtxLibName
+    implementation libs.android.androidXappCompatLibName
+    implementation libs.android.googleMaterialLibName
+    implementation libs.android.androidXConstraintLibName
+
+    //Unit Testing
+    testImplementation libs.unitTest.JUnitLibName
+    androidTestImplementation libs.unitTest.androidXJUnitLibName
+    androidTestImplementation libs.unitTest.androidXEspressoCoreLibName
+    testImplementation libs.androidCoreArchTest.androidCoreArchTestLibName
+    //Mock
+    testImplementation libs.mockk.mockkLibName
+    //Coroutines Tests
+    implementation libs.coroutinesTest.coroutinesTestLibName
+    //Truth from Google
+    implementation libs.truth.truthLibName
+
+    //Navigation Components
+    implementation libs.navigation.navigationKtxFragmentLibName
+    implementation libs.navigation.navigationKtxUiLibName
+
+    // Data binding
+    kapt libs.databinding.dataBindingCompilerLibName
+    kapt libs.databinding.databindingCommomLibName
+
+    // Dagger - Hilt
+    implementation libs.hilt.hiltLibName
+    kapt libs.hilt.hiltGoogleCompilerLibName
+    //implementation libs.hilt.hiltLifecyleViewModelLibName
+    kapt libs.hilt.hiltAndroidxCompiler
+
+    // Retrofit
+    implementation libs.retrofit.retrofit2LibName
+    implementation libs.retrofit.retrofit2GsonLibName
+
+    //OkHttp3
+    implementation libs.okhttp3.okhttp3LogingLibName
+    implementation libs.okhttp3.okhttp3LibName
+
+    //Lottie animations
+    implementation libs.lottie.lottieLibName
 }
