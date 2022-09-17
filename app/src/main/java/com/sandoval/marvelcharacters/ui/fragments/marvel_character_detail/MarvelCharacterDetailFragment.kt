@@ -1,4 +1,4 @@
-package com.sandoval.marvelcharacters.ui.fragments
+package com.sandoval.marvelcharacters.ui.fragments.marvel_character_detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
