@@ -7,14 +7,17 @@ import com.sandoval.marvelcharacters.data.models.marvel_characters_list.MarvelCh
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface MarvelCharactersService {
 
     //Get Marvel Characters List
     @GET(MARVEL_CHARACTERS_LIST_PATH)
-    suspend fun getMarvelCharactersList(): Response<MarvelCharactersListResponse>
+    suspend fun getMarvelCharactersList(
+        @Query("limit") limit: Int? = null,
+    ): Response<MarvelCharactersListResponse>
 
-    //Get Marvel Characters List
+    //Get Marvel Character Detail
     @GET(MARVEL_CHARACTER_DETAIL_PATH)
     suspend fun getMarvelCharacterDetail(
         @Path("charactersId") charactersId: Int
