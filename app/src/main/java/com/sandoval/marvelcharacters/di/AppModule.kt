@@ -38,7 +38,7 @@ object AppModule {
                         val newUrl = chain.request().url
                             .newBuilder()
                             .addQueryParameter(TS, currentTime)
-                            .addQueryParameter(PRIVATE_KEY, PUBLIC_KEY)
+                            .addQueryParameter(APIKEY, PUBLIC_KEY)
                             .addQueryParameter(
                                 HASH,
                                 provideToMd5(currentTime + PRIVATE_KEY + PUBLIC_KEY)
@@ -59,7 +59,7 @@ object AppModule {
                         val newUrl = chain.request().url
                             .newBuilder()
                             .addQueryParameter(TS, currentTime)
-                            .addQueryParameter(PRIVATE_KEY, PUBLIC_KEY)
+                            .addQueryParameter(APIKEY, PUBLIC_KEY)
                             .addQueryParameter(
                                 HASH,
                                 provideToMd5(currentTime + PRIVATE_KEY + PUBLIC_KEY)
