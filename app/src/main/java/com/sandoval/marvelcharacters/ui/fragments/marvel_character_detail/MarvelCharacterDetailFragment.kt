@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.sandoval.marvelcharacters.databinding.FragmentMarvelCharacterDetailBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MarvelCharacterDetailFragment : Fragment() {
 
     private var _fragmentMarvelCharacterDetailBinding: FragmentMarvelCharacterDetailBinding? = null
