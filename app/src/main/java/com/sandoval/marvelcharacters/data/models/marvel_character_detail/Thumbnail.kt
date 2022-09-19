@@ -6,8 +6,9 @@ data class Thumbnail(
     val extension: String?,
     val path: String?
 ){
-    fun toDomainObject() = DThumbnail(
-        extension = extension ?: "",
-        path = path ?: ""
-    )
+    fun toDomainObject() =
+        DThumbnail(
+            extension = extension ?: "",
+            path = path ?: ""
+        )
 }
