@@ -12,12 +12,12 @@ data class MarvelCharacterDetailResponse(
     val status: String?
 ){
     fun toDomainObject() = DMarvelCharacterDetailResponse(
-        attributionHTML = attributionHTML ?: "",
-        attributionText = attributionText ?: "",
-        code = code ?: 0,
-        copyright = copyright ?: "",
-        data = data?.toDomainObject(),
-        etag = etag ?: "",
-        status = status ?: ""
-    )
+            attributionHTML = attributionHTML ?: "",
+            attributionText = attributionText ?: "",
+            code = code ?: 0,
+            copyright = copyright ?: "",
+            data = data?.toDomainObject(),
+            etag = etag ?: "",
+            status = status ?: ""
+        )
 }

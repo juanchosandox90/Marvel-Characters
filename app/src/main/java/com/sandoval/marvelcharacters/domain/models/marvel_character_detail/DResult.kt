@@ -1,7 +1,7 @@
 package com.sandoval.marvelcharacters.domain.models.marvel_character_detail
 
 data class DResult(
-        val comics: DComics?,
+    val comics: DComics?,
     val description: String?,
     val events: DEvents?,
     val id: Int?,

@@ -11,13 +11,14 @@ data class MarvelCharactersListResponse(
     val etag: String?,
     val status: String?
 ) {
-    fun toDomainObject() = DMarvelCharactersListResponse(
-        attributionHTML = attributionHTML ?: "",
-        attributionText = attributionText ?: "",
-        code = code ?: 0,
-        copyright = copyright ?: "",
-        data = data?.toDomainObject(),
-        etag = etag ?: "",
-        status = status ?: ""
-    )
+    fun toDomainObject() =
+        DMarvelCharactersListResponse(
+            attributionHTML = attributionHTML ?: "",
+            attributionText = attributionText ?: "",
+            code = code ?: 0,
+            copyright = copyright ?: "",
+            data = data?.toDomainObject(),
+            etag = etag ?: "",
+            status = status ?: ""
+        )
 }

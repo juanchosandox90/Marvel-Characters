@@ -1,4 +1,4 @@
-package com.sandoval.marvelcharacters.ui.fragments.marvel_characters_list
+package com.sandoval.marvelcharacters.ui.marvel_characters_list.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import com.sandoval.marvelcharacters.databinding.FragmentMarvelCharactersBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MarvelCharactersFragment : Fragment() {
+class MarvelCharactersListFragment : Fragment() {
 
     private var _fragmentMarvelCharactersBinding: FragmentMarvelCharactersBinding? = null
     private val fragmentMarvelCharactersBinding get() = _fragmentMarvelCharactersBinding!!
@@ -24,7 +24,7 @@ class MarvelCharactersFragment : Fragment() {
 
         fragmentMarvelCharactersBinding.goToDetail.setOnClickListener {
             val action =
-                MarvelCharactersFragmentDirections.actionNavigationMarvelCharacterListFragmentToMarvelCharacterDetailFragment()
+                MarvelCharactersListFragmentDirections.actionNavigationMarvelCharacterListFragmentToMarvelCharacterDetailFragment()
             findNavController().navigate(action)
         }
 
