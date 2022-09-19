@@ -9,7 +9,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragments.marvel_character_detail.MarvelCharacterDetailFragment">
+        tools:context=".ui.marvel_character_detail.fragments.MarvelCharacterDetailFragment">
 
         <TextView
             android:layout_width="match_parent"

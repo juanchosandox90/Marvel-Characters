@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_marve_character_list_fragment"
-        android:name="com.sandoval.marvelcharacters.ui.fragments.marvel_characters_list.MarvelCharactersFragment"
+        android:name="com.sandoval.marvelcharacters.ui.marvel_characters_list.fragments.MarvelCharactersListFragment"
         android:label="Marvel Characters List"
         tools:layout="@layout/fragment_marvel_characters">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_marve_character_detail_fragment"
-        android:name="com.sandoval.marvelcharacters.ui.fragments.marvel_character_detail.MarvelCharacterDetailFragment"
+        android:name="com.sandoval.marvelcharacters.ui.marvel_character_detail.fragments.MarvelCharacterDetailFragment"
         android:label="Marvel Character Detail"
         tools:layout="@layout/fragment_marvel_character_detail" />
 

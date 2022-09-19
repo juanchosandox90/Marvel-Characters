@@ -5,6 +5,8 @@ import com.google.gson.GsonBuilder
 import com.sandoval.marvelcharacters.BuildConfig
 import com.sandoval.marvelcharacters.commons.*
 import com.sandoval.marvelcharacters.data.remote.api.MarvelCharactersService
+import com.sandoval.marvelcharacters.data.remote.repository.marvel_characters_list.RemoteDataMarvelCharactersListRepository
+import com.sandoval.marvelcharacters.domain.repository.marvel_characters_list.IGetMarvelCharactersListRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -91,6 +93,11 @@ object AppModule {
     @Singleton
     fun providesApiService(retrofit: Retrofit): MarvelCharactersService =
         retrofit.create(MarvelCharactersService::class.java)
+
+    @Provides
+    @Singleton
+    fun providesGetEmployeeList(remoteDataMarvelCharactersListRepository: RemoteDataMarvelCharactersListRepository): IGetMarvelCharactersListRepository =
+        remoteDataMarvelCharactersListRepository
 
     fun provideToMd5(encrypted: String): String {
         var pass = encrypted
