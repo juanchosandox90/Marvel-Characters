@@ -42,16 +42,16 @@ class MarvelCharactersListFragment : Fragment() {
         marvelCharactersListViewModel.marvelCharactersListViewModel.observe(viewLifecycleOwner) {
             when {
                 it.loading -> {
-                    Log.d("Loading", "Loading...")
+
                 }
                 it.isEmpty -> {
-                    Log.d("Data", "Empty...")
+
                 }
                 it.marvelCharactersList != null -> {
-                    Log.d("MarvelCharactersList: ", it.marvelCharactersList.toString())
+
                 }
                 it.errorMessage != null -> {
-                    Log.e("Error", it.errorMessage.toString())
+               
                 }
             }
         }
