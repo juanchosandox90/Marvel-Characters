@@ -2,9 +2,10 @@ package com.sandoval.marvelcharacters.ui.marvel_characters_list.fragments
 
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.sandoval.marvelcharacters.databinding.FragmentMarvelCharactersBinding
 import com.sandoval.marvelcharacters.ui.base.BaseFragment
+import com.sandoval.marvelcharacters.ui.marvel_characters_list.adapters.MarvelCharactersListAdapter
 import com.sandoval.marvelcharacters.ui.marvel_characters_list.viewmodel.MarvelCharactersListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,13 +15,18 @@ class MarvelCharactersListFragment : BaseFragment<FragmentMarvelCharactersBindin
 ) {
 
     private val marvelCharactersListViewModel: MarvelCharactersListViewModel by viewModels()
+    private lateinit var marvelCharactersListAdapter: MarvelCharactersListAdapter
 
     override fun initViews() {
-        binding.goToDetail.setOnClickListener {
-            val action =
-                MarvelCharactersListFragmentDirections.actionNavigationMarvelCharacterListFragmentToMarvelCharacterDetailFragment()
-            findNavController().navigate(action)
+        marvelCharactersListAdapter = MarvelCharactersListAdapter()
+        marvelCharactersListAdapter.apply {
+            registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+                override fun onItemRangeChanged(positionStart: Int, itemCount: Int) {
+                    binding.marvelCharactersListRecycler.smoothScrollToPosition(0)
+                }
+            })
         }
+        setupMarvelCharactersListRecycler()
     }
 
     override fun initViewModels() {
@@ -34,6 +40,7 @@ class MarvelCharactersListFragment : BaseFragment<FragmentMarvelCharactersBindin
                     hideLoading()
                 }
                 it.marvelCharactersList != null -> {
+                    binding.marvelCharactersListRecycler.visibility = View.VISIBLE
                     hideLoading()
                 }
                 it.errorMessage != null -> {
@@ -41,6 +48,14 @@ class MarvelCharactersListFragment : BaseFragment<FragmentMarvelCharactersBindin
                 }
             }
         }
+
+        marvelCharactersListViewModel.listMarvelCharactersResults.observe(viewLifecycleOwner) { listMarvelCharacters ->
+            marvelCharactersListAdapter.submitMarvelCharactersList(listMarvelCharacters)
+        }
+    }
+
+    private fun setupMarvelCharactersListRecycler() {
+        binding.marvelCharactersListRecycler.adapter = marvelCharactersListAdapter
     }
 
     private fun showLoading() {

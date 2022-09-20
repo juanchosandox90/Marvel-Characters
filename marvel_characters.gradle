@@ -48,6 +48,9 @@ versions.okHttp3interceptorVersions = "5.0.0-alpha.2"
 //Lottie Animations
 versions.lottieVersion = "5.2.0"
 
+//Img loading Coil version
+versions.coilImgVersion = "2.1.0"
+
 /*
 Tests Versions of Tests Libraries
 Android Arch
@@ -103,7 +106,6 @@ unitTest.androidXEspressoCoreLibName = "androidx.test.espresso:espresso-core:$ve
 def hilt = [:]
 hilt.hiltLibName = "com.google.dagger:hilt-android:$versions.hiltVersion"
 hilt.hiltGoogleCompilerLibName = "com.google.dagger:hilt-android-compiler:$versions.hiltVersion"
-//hilt.hiltLifecyleViewModelLibName = "androidx.hilt:hilt-lifecycle-viewmodel:$versions.hiltLifecycleViewmodelVersion"
 hilt.hiltAndroidxCompiler = "androidx.hilt:hilt-compiler:$versions.hiltAndroixVersion"
 
 def navigation = [:]
@@ -124,6 +126,9 @@ okhttp3.okhttp3LogingLibName = "com.squareup.okhttp3:logging-interceptor:$versio
 
 def lottie = [:]
 lottie.lottieLibName = "com.airbnb.android:lottie:$versions.lottieVersion"
+
+def coilImgLoading = [:]
+coilImgLoading.coilImgLoadingLibName = "io.coil-kt:coil:$versions.coilImgVersion"
 
 /*
 Test Libraries for Unit tests
@@ -157,6 +162,7 @@ libs.databinding = databinding
 libs.retrofit = retrofit
 libs.okhttp3 = okhttp3
 libs.lottie = lottie
+libs.coilImgLoading = coilImgLoading
 libs.androidCoreArchTest = androidCoreArchTest
 libs.mockk = mockk
 libs.coroutinesTest = coroutinesTest

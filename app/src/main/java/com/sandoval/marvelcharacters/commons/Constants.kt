@@ -10,5 +10,3 @@ const val PUBLIC_KEY =
     "9eaff84529c2dc769a3f5af7586301cf"
 const val PRIVATE_KEY =
     "37d5fcef88e07b70c8cba78330f439217ed45ea5"
-//const val PUBLIC_KEY = "[INSERT_PUBLICK_KEY_HERE]"
-//const val PRIVATE_KEY = "[INSERT_PRIVATE_KEY_HERE]"
