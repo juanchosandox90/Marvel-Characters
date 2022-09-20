@@ -79,7 +79,6 @@ dependencies {
     // Dagger - Hilt
     implementation libs.hilt.hiltLibName
     kapt libs.hilt.hiltGoogleCompilerLibName
-    //implementation libs.hilt.hiltLifecyleViewModelLibName
     kapt libs.hilt.hiltAndroidxCompiler
 
     // Retrofit
@@ -92,4 +91,7 @@ dependencies {
 
     //Lottie animations
     implementation libs.lottie.lottieLibName
+
+    //Coil Load images
+    implementation libs.coilImgLoading.coilImgLoadingLibName
 }
