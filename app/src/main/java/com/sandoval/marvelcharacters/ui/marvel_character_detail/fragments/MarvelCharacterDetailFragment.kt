@@ -1,5 +1,6 @@
 package com.sandoval.marvelcharacters.ui.marvel_character_detail.fragments
 
+import android.view.View
 import androidx.fragment.app.viewModels
 import com.sandoval.marvelcharacters.databinding.FragmentMarvelCharacterDetailBinding
 import com.sandoval.marvelcharacters.ui.base.BaseFragment
@@ -21,18 +22,26 @@ class MarvelCharacterDetailFragment : BaseFragment<FragmentMarvelCharacterDetail
         marvelCharacterDetailViewModel.marvelCharacterDetailViewModel.observe(viewLifecycleOwner) {
             when {
                 it.loading -> {
-
+                    showLoading()
                 }
                 it.isEmpty -> {
-
+                    hideLoading()
                 }
                 it.marvelCharacterDetail != null -> {
-
+                    hideLoading()
                 }
                 it.errorMessage != null -> {
-
+                    hideLoading()
                 }
             }
         }
+    }
+
+    private fun showLoading() {
+        binding.loadingSpinner.loadingContainer.visibility = View.VISIBLE
+    }
+
+    private fun hideLoading() {
+        binding.loadingSpinner.loadingContainer.visibility = View.GONE
     }
 }
