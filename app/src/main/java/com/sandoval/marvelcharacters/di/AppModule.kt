@@ -5,7 +5,9 @@ import com.google.gson.GsonBuilder
 import com.sandoval.marvelcharacters.BuildConfig
 import com.sandoval.marvelcharacters.commons.*
 import com.sandoval.marvelcharacters.data.remote.api.MarvelCharactersService
+import com.sandoval.marvelcharacters.data.remote.repository.marvel_character_detail.RemoteDataMarvelCharacterDetailRepository
 import com.sandoval.marvelcharacters.data.remote.repository.marvel_characters_list.RemoteDataMarvelCharactersListRepository
+import com.sandoval.marvelcharacters.domain.repository.marvel_character_detail.IGetMarvelCharacterDetailRepository
 import com.sandoval.marvelcharacters.domain.repository.marvel_characters_list.IGetMarvelCharactersListRepository
 import dagger.Module
 import dagger.Provides
@@ -34,45 +36,28 @@ object AppModule {
         logging.level = HttpLoggingInterceptor.Level.BODY
         when {
             BuildConfig.DEBUG -> {
-                return OkHttpClient().newBuilder()
-                    .addInterceptor { chain ->
+                return OkHttpClient().newBuilder().addInterceptor { chain ->
                         val currentTime = System.currentTimeMillis().toString()
-                        val newUrl = chain.request().url
-                            .newBuilder()
-                            .addQueryParameter(TS, currentTime)
-                            .addQueryParameter(APIKEY, PUBLIC_KEY)
-                            .addQueryParameter(
-                                HASH,
-                                provideToMd5(currentTime + PRIVATE_KEY + PUBLIC_KEY)
-                            )
-                            .build()
-                        val newRequest = chain.request().newBuilder()
-                            .url(newUrl)
-                            .build()
+                        val newUrl =
+                            chain.request().url.newBuilder().addQueryParameter(TS, currentTime)
+                                .addQueryParameter(APIKEY, PUBLIC_KEY).addQueryParameter(
+                                    HASH, provideToMd5(currentTime + PRIVATE_KEY + PUBLIC_KEY)
+                                ).build()
+                        val newRequest = chain.request().newBuilder().url(newUrl).build()
                         chain.proceed(newRequest)
-                    }
-                    .addInterceptor(logging)
-                    .build()
+                    }.addInterceptor(logging).build()
             }
             else -> {
-                return OkHttpClient().newBuilder()
-                    .addInterceptor { chain ->
+                return OkHttpClient().newBuilder().addInterceptor { chain ->
                         val currentTime = System.currentTimeMillis().toString()
-                        val newUrl = chain.request().url
-                            .newBuilder()
-                            .addQueryParameter(TS, currentTime)
-                            .addQueryParameter(APIKEY, PUBLIC_KEY)
-                            .addQueryParameter(
-                                HASH,
-                                provideToMd5(currentTime + PRIVATE_KEY + PUBLIC_KEY)
-                            )
-                            .build()
-                        val newRequest = chain.request().newBuilder()
-                            .url(newUrl)
-                            .build()
+                        val newUrl =
+                            chain.request().url.newBuilder().addQueryParameter(TS, currentTime)
+                                .addQueryParameter(APIKEY, PUBLIC_KEY).addQueryParameter(
+                                    HASH, provideToMd5(currentTime + PRIVATE_KEY + PUBLIC_KEY)
+                                ).build()
+                        val newRequest = chain.request().newBuilder().url(newUrl).build()
                         chain.proceed(newRequest)
-                    }
-                    .build()
+                    }.build()
             }
         }
 
@@ -81,13 +66,10 @@ object AppModule {
     @Singleton
     @Provides
     fun provideRetrofit(
-        okHttpClient: OkHttpClient,
-        BASE_URL: String
+        okHttpClient: OkHttpClient, BASE_URL: String
     ): Retrofit = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create(GsonBuilder().serializeNulls().create()))
-        .baseUrl(BASE_URL)
-        .client(okHttpClient)
-        .build()
+        .baseUrl(BASE_URL).client(okHttpClient).build()
 
     @Provides
     @Singleton
@@ -96,8 +78,13 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providesGetEmployeeList(remoteDataMarvelCharactersListRepository: RemoteDataMarvelCharactersListRepository): IGetMarvelCharactersListRepository =
+    fun providesMarvelCharactersList(remoteDataMarvelCharactersListRepository: RemoteDataMarvelCharactersListRepository): IGetMarvelCharactersListRepository =
         remoteDataMarvelCharactersListRepository
+
+    @Provides
+    @Singleton
+    fun providesMarvelCharacterDetail(remoteDataMarvelCharacterDetailRepository: RemoteDataMarvelCharacterDetailRepository): IGetMarvelCharacterDetailRepository =
+        remoteDataMarvelCharacterDetailRepository
 
     fun provideToMd5(encrypted: String): String {
         var pass = encrypted
