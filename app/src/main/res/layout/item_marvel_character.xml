@@ -50,7 +50,7 @@
                     android:foreground="@drawable/ic_background_gradient_for_character_images"
                     android:loadBackgroundImgOrColor="@{results.thumbnail}"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ironman"
+                    android:src="@drawable/ic_iron_man"
                     app:layout_constraintBottom_toTopOf="@+id/marvel_character_name"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
