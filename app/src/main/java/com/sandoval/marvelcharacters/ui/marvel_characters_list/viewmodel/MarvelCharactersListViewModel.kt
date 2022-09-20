@@ -7,7 +7,7 @@ import com.sandoval.marvelcharacters.data.network.Failure
 import com.sandoval.marvelcharacters.domain.models.marvel_characters_list.DData
 import com.sandoval.marvelcharacters.domain.models.marvel_characters_list.DResult
 import com.sandoval.marvelcharacters.domain.usecase.marvel_characters_list.GetMarvelCharactersListUseCase
-import com.sandoval.marvelcharacters.ui.marvel_characters_list.mapper.toPresentation
+import com.sandoval.marvelcharacters.ui.mapper.toPresentation
 import com.sandoval.marvelcharacters.ui.marvel_characters_list.models.state.MarvelCharactersListView
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job

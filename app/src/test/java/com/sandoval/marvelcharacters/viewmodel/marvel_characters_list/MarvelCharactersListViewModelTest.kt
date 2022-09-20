@@ -5,7 +5,7 @@ import com.sandoval.marvelcharacters.data.network.Failure
 import com.sandoval.marvelcharacters.data.utils.Either
 import com.sandoval.marvelcharacters.domain.models.marvel_characters_list.*
 import com.sandoval.marvelcharacters.domain.usecase.marvel_characters_list.GetMarvelCharactersListUseCase
-import com.sandoval.marvelcharacters.ui.marvel_characters_list.mapper.toPresentation
+import com.sandoval.marvelcharacters.ui.mapper.toPresentation
 import com.sandoval.marvelcharacters.ui.marvel_characters_list.viewmodel.MarvelCharactersListViewModel
 import com.sandoval.utils.UnitTest
 import com.sandoval.utils.getOrAwaitValueTest
