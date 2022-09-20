@@ -54,6 +54,7 @@ class MarvelCharactersListFragment : BaseFragment<FragmentMarvelCharactersBindin
                     hideLoading()
                 }
                 it.errorMessage != null -> {
+                    setupGeneralErrorView()
                     hideLoading()
                 }
             }
@@ -75,4 +76,20 @@ class MarvelCharactersListFragment : BaseFragment<FragmentMarvelCharactersBindin
     private fun hideLoading() {
         binding.loadingSpinner.loadingContainer.visibility = View.GONE
     }
+
+    private fun setupGeneralErrorView() {
+        binding.marvelCharactersListRecycler.visibility = View.GONE
+        binding.generalError.generalIssues.visibility = View.VISIBLE
+        binding.generalError.reload.setOnClickListener {
+            marvelCharactersListViewModel.getResults(100)
+            binding.generalError.generalIssues.visibility = View.GONE
+            showLoading()
+        }
+    }
+
+    override fun showNoInternetConnection() {
+        binding.marvelCharactersListRecycler.visibility = View.GONE
+        binding.connectionError.generalIssues.visibility = View.VISIBLE
+    }
+
 }
