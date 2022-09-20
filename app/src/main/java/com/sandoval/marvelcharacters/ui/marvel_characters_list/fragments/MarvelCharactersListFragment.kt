@@ -22,7 +22,7 @@ class MarvelCharactersListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _fragmentMarvelCharactersBinding =
             FragmentMarvelCharactersBinding.inflate(inflater, container, false)
 
