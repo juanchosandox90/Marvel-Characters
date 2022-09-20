@@ -105,4 +105,32 @@ class MarvelCharacterDetailViewModelTest : UnitTest() {
         Truth.assertThat(res.isEmpty).isFalse()
         Truth.assertThat(res.marvelCharacterDetail).isEqualTo(data.toPresentation())
     }
+
+    @Test
+    fun `getMarvelCharacterDetail should show error view when error occurs`() {
+        every { getMarvelCharacterDetailUseCase(any(), 1234567890, any()) }.answers {
+            lastArg<(Either<Failure, DData>) -> Unit>()(Either.Left(Failure.ServerError))
+        }
+        marvelCharacterDetailViewModel.getResults(1234567890)
+        val res =
+            marvelCharacterDetailViewModel.marvelCharacterDetailViewModel.getOrAwaitValueTest()
+        Truth.assertThat(res.errorMessage).isNotNull()
+        Truth.assertThat(res.loading).isFalse()
+        Truth.assertThat(res.isEmpty).isFalse()
+        Truth.assertThat(res.marvelCharacterDetail).isNull()
+    }
+
+    @Test
+    fun `getMarvelCharacterDetail should show error connection view when a error network connection occurs`() {
+        every { getMarvelCharacterDetailUseCase(any(), 1234567890, any()) }.answers {
+            lastArg<(Either<Failure, DData>) -> Unit>()(Either.Left(Failure.NetworkConnection))
+        }
+        marvelCharacterDetailViewModel.getResults(1234567890)
+        val res =
+            marvelCharacterDetailViewModel.marvelCharacterDetailViewModel.getOrAwaitValueTest()
+        Truth.assertThat(res.errorMessage).isNotNull()
+        Truth.assertThat(res.loading).isFalse()
+        Truth.assertThat(res.isEmpty).isFalse()
+        Truth.assertThat(res.marvelCharacterDetail).isNull()
+    }
 }
