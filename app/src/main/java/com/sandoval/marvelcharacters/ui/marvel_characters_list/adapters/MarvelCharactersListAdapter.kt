@@ -12,7 +12,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MarvelCharactersListAdapter :
+class MarvelCharactersListAdapter(
+    private val onMarvelCharactersListItemSelected: MarvelCharactersListItemListener
+) :
     ListAdapter<MarvelCharactersItems, RecyclerView.ViewHolder>(MarvelCharactersListDiffCallback()) {
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
@@ -37,7 +39,7 @@ class MarvelCharactersListAdapter :
         when (holder) {
             is MarvelCharactersListPreviewViewHolder -> {
                 val marvelCharacter = item as MarvelCharactersItems.MarvelCharacterItem
-                holder.bind(marvelCharacter.results)
+                holder.bind(marvelCharacter.results, onMarvelCharactersListItemSelected)
             }
         }
     }
@@ -58,9 +60,11 @@ class MarvelCharactersListAdapter :
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(
-            results: IDResultList
+            results: IDResultList,
+            onMarvelCharactersListItemSelected: MarvelCharactersListItemListener
         ) {
             binding.results = results
+            binding.resultsListener = onMarvelCharactersListItemSelected
             binding.executePendingBindings()
         }
 

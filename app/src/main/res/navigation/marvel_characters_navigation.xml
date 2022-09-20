@@ -18,6 +18,10 @@
         android:id="@+id/navigation_marve_character_detail_fragment"
         android:name="com.sandoval.marvelcharacters.ui.marvel_character_detail.fragments.MarvelCharacterDetailFragment"
         android:label="Marvel Character Detail"
-        tools:layout="@layout/fragment_marvel_character_detail" />
+        tools:layout="@layout/fragment_marvel_character_detail" >
+        <argument
+            android:name="characterId"
+            app:argType="integer" />
+    </fragment>
 
 </navigation>

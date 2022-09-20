@@ -11,6 +11,10 @@
             name="results"
             type="com.sandoval.marvelcharacters.ui.marvel_characters_list.models.helper.IDResultList" />
 
+        <variable
+            name="resultsListener"
+            type="com.sandoval.marvelcharacters.ui.marvel_characters_list.adapters.MarvelCharactersListItemListener"/>
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,6 +25,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/employee_card"
             android:layout_width="wrap_content"
+            android:onClick="@{()->resultsListener.onMarvelCharactersListItemClicked(results.id)}"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"

@@ -2,6 +2,7 @@ package com.sandoval.marvelcharacters.ui.marvel_character_detail.fragments
 
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.sandoval.marvelcharacters.databinding.FragmentMarvelCharacterDetailBinding
 import com.sandoval.marvelcharacters.ui.base.BaseFragment
 import com.sandoval.marvelcharacters.ui.marvel_character_detail.viewmodel.MarvelCharacterDetailViewModel
@@ -13,12 +14,15 @@ class MarvelCharacterDetailFragment : BaseFragment<FragmentMarvelCharacterDetail
 ) {
 
     private val marvelCharacterDetailViewModel: MarvelCharacterDetailViewModel by viewModels()
+    private val args by navArgs<MarvelCharacterDetailFragmentArgs>()
+    private var characterId: Int = 0
 
     override fun initViews() {
+        characterId = args.characterId
     }
 
     override fun initViewModels() {
-        marvelCharacterDetailViewModel.getResults(1017100)//TODO Test ID, here the id will be passed via safeArgs
+        marvelCharacterDetailViewModel.getResults(characterId)
         marvelCharacterDetailViewModel.marvelCharacterDetailViewModel.observe(viewLifecycleOwner) {
             when {
                 it.loading -> {
