@@ -1,7 +1,10 @@
 package com.sandoval.marvelcharacters.ui.marvel_character_detail.fragments
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import coil.load
@@ -23,6 +26,9 @@ class MarvelCharacterDetailFragment : BaseFragment<FragmentMarvelCharacterDetail
 
     override fun initViews() {
         characterId = args.characterId
+        binding.marvelCharacterImageShare.setOnClickListener {
+            setupShareFeature()
+        }
     }
 
     override fun initViewModels() {
@@ -56,6 +62,21 @@ class MarvelCharacterDetailFragment : BaseFragment<FragmentMarvelCharacterDetail
 
     }
 
+    private fun setupShareFeature() {
+        val intent = Intent(Intent.ACTION_VIEW)
+        val title = "Check this great app: Marvel Characters App"
+        val chooser = Intent.createChooser(intent, title)
+        try {
+            startActivity(chooser)
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(
+                requireActivity(),
+                "No App Found to share information",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
     private fun setupMarvelCharacterDetailView(results: List<DResult>) {
         binding.marvelCharacterNameDetail.text = results.first().name.toString()
         binding.marvelCharacterDescriptionDetail.text = results.first().description.toString()
@@ -65,7 +86,6 @@ class MarvelCharacterDetailFragment : BaseFragment<FragmentMarvelCharacterDetail
         when {
             thumbnailPath != null && thumbnailExtension != null -> {
                 val thumbnailUrl = "$thumbnailPath.$thumbnailExtension"
-                Log.d("ThumbnailUrl", thumbnailUrl)
                 binding.marvelCharacterImageDetail.load(thumbnailUrl) {
                     crossfade(300)
                     listener(onError = { _, _ ->

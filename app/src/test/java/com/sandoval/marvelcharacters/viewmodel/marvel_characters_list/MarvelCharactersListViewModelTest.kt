@@ -109,4 +109,30 @@ class MarvelCharactersListViewModelTest : UnitTest() {
         Truth.assertThat(res.marvelCharactersList).isEqualTo(data.toPresentation())
     }
 
+    @Test
+    fun `getMarvelCharactersList should show error view when error occurs`() {
+        every { getMarvelCharactersListUseCase(any(), 100, any()) }.answers {
+            lastArg<(Either<Failure, List<DData>>) -> Unit>()(Either.Left(Failure.ServerError))
+        }
+        marvelCharactersListViewModel.getResults(100)
+        val res = marvelCharactersListViewModel.marvelCharactersListViewModel.getOrAwaitValueTest()
+        Truth.assertThat(res.errorMessage).isNotNull()
+        Truth.assertThat(res.loading).isFalse()
+        Truth.assertThat(res.isEmpty).isFalse()
+        Truth.assertThat(res.marvelCharactersList).isNull()
+    }
+
+    @Test
+    fun `getMarvelCharactersList should show error connection view when a error network connection occurs`() {
+        every { getMarvelCharactersListUseCase(any(), 100, any()) }.answers {
+            lastArg<(Either<Failure, List<DData>>) -> Unit>()(Either.Left(Failure.NetworkConnection))
+        }
+        marvelCharactersListViewModel.getResults(100)
+        val res = marvelCharactersListViewModel.marvelCharactersListViewModel.getOrAwaitValueTest()
+        Truth.assertThat(res.errorMessage).isNotNull()
+        Truth.assertThat(res.loading).isFalse()
+        Truth.assertThat(res.isEmpty).isFalse()
+        Truth.assertThat(res.marvelCharactersList).isNull()
+    }
+
 }
