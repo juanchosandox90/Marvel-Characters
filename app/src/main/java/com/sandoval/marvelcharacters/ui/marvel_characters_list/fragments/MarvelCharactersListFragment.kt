@@ -2,10 +2,12 @@ package com.sandoval.marvelcharacters.ui.marvel_characters_list.fragments
 
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.sandoval.marvelcharacters.databinding.FragmentMarvelCharactersBinding
 import com.sandoval.marvelcharacters.ui.base.BaseFragment
 import com.sandoval.marvelcharacters.ui.marvel_characters_list.adapters.MarvelCharactersListAdapter
+import com.sandoval.marvelcharacters.ui.marvel_characters_list.adapters.MarvelCharactersListItemListener
 import com.sandoval.marvelcharacters.ui.marvel_characters_list.viewmodel.MarvelCharactersListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,7 +20,15 @@ class MarvelCharactersListFragment : BaseFragment<FragmentMarvelCharactersBindin
     private lateinit var marvelCharactersListAdapter: MarvelCharactersListAdapter
 
     override fun initViews() {
-        marvelCharactersListAdapter = MarvelCharactersListAdapter()
+        marvelCharactersListAdapter = MarvelCharactersListAdapter(
+            onMarvelCharactersListItemSelected = MarvelCharactersListItemListener { characterId ->
+                val action =
+                    MarvelCharactersListFragmentDirections.actionNavigationMarvelCharacterListFragmentToMarvelCharacterDetailFragment(
+                        characterId
+                    )
+                findNavController().navigate(action)
+            }
+        )
         marvelCharactersListAdapter.apply {
             registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
                 override fun onItemRangeChanged(positionStart: Int, itemCount: Int) {
